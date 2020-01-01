@@ -1,33 +1,29 @@
+from utilities import find_line_given_two_points
 
-mo = [1, 2, 3, 4]
-result = list()
-len_list = len(mo)
-p1 = 0
-p2 = 1
-p3 = 2
-# p1=0, p2=1, p3=0
-# [1, 2, 3]
-#  ^     ^
-#     ^
+# Get all permutations of [1, 2, 3]
+# perm = combinations([1, 2, 3, 4], 3)
+#
+# print(list(takewhile(lambda x: len(x) <= 2, [(1, 2, 3), (1, 2, 4), (1, 3, 4), (2, 3, 4)])))
+# print(list(perm))
+# # Print the obtained permutations
+# for i in perm:
+#     print(i)
 
-while True:
-    while p3 != len_list and p2 != len_list:
-        if p3 == p1 or p3 == p2:
-            p3 += 1
-        else:
-            result.append([mo[p1], mo[p2], "=====>", mo[p3]])
-            p3 += 1
 
-    if p1 == len_list - 2 and p2 == len_list:
-        break
-
-    if p3 == len_list:
-        p3 = 0
-        p2 += 1
+def collinear(x1, y1, x2, y2, x3, y3):
+    if (y3 - y2) * (x2 - x1) == (y2 - y1) * (x3 - x2):
+        print("Yes")
+        print("(y3 - y2)", (y3 - y2))
+        print("(x2 - x1)", (x2 - x1))
+        print("(y2 - y1)", (y2 - y1))
+        print("(x3 - x2)", (x3 - x2))
+        print(find_line_given_two_points([x3, y1], [y2, y3]))
+        print(find_line_given_two_points([x1, x2], [x3, y1]))
     else:
-        p3 = 0
-        p1 += 1
-        p2 = p1 + 1
+        print("No")
 
-for i in result:
-    print(i)
+
+x1, x2, x3, y1, y2, y3 = 1, 1, 1, 1, 4, 5
+
+collinear(x1, y1, x2, y2, x3, y3)
+

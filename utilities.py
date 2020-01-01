@@ -6,15 +6,15 @@ def is_on_line(a: int, b: int, c: int, point: list):
     :param point: a list containing two integers
     :return: bool
     """
-    return formula(a, b, point) * (point[1]) == c
+    return get_slope_value(a, b, point) == c  # get_slope_value(a, b, point) * (point[1]) == c
 
 
-def formula(a: int, b: int, point: list):
+def get_slope_value(a: int, b: int, point: list):
     """
     :param a: int
     :param b: int
     :param point: a list containing two integers
-    :return: the value of
+    :return: value of the slope
     """
     return (a * (point[0])) + (b * (point[1]))
 
@@ -29,8 +29,8 @@ def validate(point: list):
         if len(point) == 2:
             first_element = point[0]
             second_element = point[1]
-            if not isinstance(first_element, int) and not isinstance(second_element, int):
-                raise TypeError("The points list must only contain numbers.")
+            if not isinstance(first_element, (int, float)) or not isinstance(second_element, (int, float)):
+                raise TypeError("The points list must only contain float.")
             return point
         else:
             raise TypeError("Each list of points must contain two integers.")
@@ -38,13 +38,19 @@ def validate(point: list):
         raise TypeError("Please input a list of points.")
 
 
+def format_line(a, b, c):
+    if b < 0:
+        return f"{a}x {b}y = {c}"
+    return f"{a}x + {b}y = {c}"
+
+
 def find_line_given_two_points(p: list, q: list):
     """
     :param p: int
     :param q: int
-    :return: values for two given points.
+    :return: the equation of the line which passes through two points
     """
     a = q[1] - p[1]
     b = p[0] - q[0]
-    c = formula(a, b, p)
+    c = get_slope_value(a, b, p)
     return a, b, c

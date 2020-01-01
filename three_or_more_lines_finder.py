@@ -7,10 +7,10 @@
 ## Email: mmahjoub@westmont.edu
 ## Status: production
 """
-from utilities import find_line_given_two_points, is_on_line, validate
+from utilities import find_line_given_two_points, is_on_line, validate, format_line
 
 
-def lines_intersection(list_points):
+def three_or_more_lines_finder(list_points):
     """
     :param list_points: a list containing lists of points.
     :return: a list of lines.
@@ -34,7 +34,7 @@ def lines_intersection(list_points):
 
                 a, b, c = find_line_given_two_points(point_1_validated, point_2_validated)
                 if is_on_line(a, b, c, point_3_validated):
-                    line = {'a': a, 'b': b, 'c': c}
+                    line = {'a': a, 'b': b, 'c': c, "formatted_line": format_line(a, b, c)}
                     if line not in result:  # remove duplicates.
                         result.append(line)
                 p3 += 1
@@ -54,10 +54,9 @@ def lines_intersection(list_points):
 
 
 if __name__ == '__main__':
-    list_points = [[5, 9], [6, 8], [3, 5]]
-    print(lines_intersection(list_points))
-    print(find_line_given_two_points(list_points[0], list_points[2]))
-
-
+    list_points = [[1, 1], [1, 4], [1, 5]]
+    list_points2 = [[5, 9], [2, 3], [1, 1]]
+    list_points3 = [[1, 1], [1, 1], [4, 5]]
+    print(three_or_more_lines_finder(list_points))
 
 
