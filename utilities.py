@@ -9,9 +9,8 @@ def collinear(x1, y1, x2, y2, x3, y3):
     :return: tuple of dictionary lines or tuple of Nones
     """
     if (y3 - y2) * (x2 - x1) == (y2 - y1) * (x3 - x2):
-        return get_line([x1, y1], [x2, y2]), \
-               get_line([x2, y2], [x3, y3]), \
-               get_line([x1, y1], [x3, y3])
+
+        return get_line([x1, y1], [x2, y2])
 
     return None, None, None
 
@@ -22,6 +21,8 @@ def get_line(p1, p2):
     :param p2: list of two numbers
     :return: dict of line
     """
+
+    # Todo: all I need is a, c to form the formula.
     a, b, c = find_line_given_two_points(p1, p2)
     return {'a': a, 'b': b, 'c': c, "formatted_line": format_line(a, b, c)}
 
@@ -55,33 +56,33 @@ def validate(point: list):
         raise TypeError("Please input a list of points.")
 
 
-def add_lines(line, line2, line3, result):
-    """
-    :param line: dict
-    :param line2: dict
-    :param line3: dict
-    :param result: dict
-    :return: None
-    """
-    if can_add_line(line, result):
-        result.append(line)
-
-    if can_add_line(line2, result):
-        result.append(line2)
-
-    if can_add_line(line3, result):
-        result.append(line3)
-
-    return None
-
-
-def can_add_line(line, result):
-    """
-    :param line: dict
-    :param result: dict
-    :return: bool
-    """
-    return line and line not in result
+# def add_lines(line, line2, line3, result):
+#     """
+#     :param line: dict
+#     :param line2: dict
+#     :param line3: dict
+#     :param result: dict
+#     :return: None
+#     """
+#     if can_add_line(line, result):
+#         result.append(line)
+#
+#     if can_add_line(line2, result):
+#         result.append(line2)
+#
+#     if can_add_line(line3, result):
+#         result.append(line3)
+#
+#     return None
+#
+#
+# def can_add_line(line, result):
+#     """
+#     :param line: dict
+#     :param result: dict
+#     :return: bool
+#     """
+#     return line and line not in result
 
 
 def format_line(a, b, c):

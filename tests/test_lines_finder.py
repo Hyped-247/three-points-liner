@@ -1,8 +1,8 @@
 import unittest
-from three_or_more_lines_finder import three_or_more_lines_finder
+from lines_finder import get_lines_intersect_three_or_more_points
 
 
-class LinesIntersectionTest(unittest.TestCase):
+class LinesFinderTest(unittest.TestCase):
 
     def setUp(self):
         self.list_1 = []
@@ -27,33 +27,33 @@ class LinesIntersectionTest(unittest.TestCase):
         self.list_9 = None
 
     def test_empty_list_points(self):
-        self.assertEqual(three_or_more_lines_finder(self.list_1), self.list_1)
+        self.assertEqual(get_lines_intersect_three_or_more_points(self.list_1), self.list_1)
 
     def test_incorrect_elements_number(self):
         with self.assertRaises(TypeError):
-            self.assertEqual(three_or_more_lines_finder(self.list_2), 2)
+            self.assertEqual(get_lines_intersect_three_or_more_points(self.list_2), 2)
 
     def test_elements_type(self):
         with self.assertRaises(TypeError):
-            self.assertEqual(three_or_more_lines_finder(self.list_3), 2)
+            self.assertEqual(get_lines_intersect_three_or_more_points(self.list_3), 2)
 
     def test_less_than_three_input(self):
-        self.assertEqual(three_or_more_lines_finder(self.list_4), self.list_1)
+        self.assertEqual(get_lines_intersect_three_or_more_points(self.list_4), self.list_1)
 
     def test_incorrect_elements_type(self):
         with self.assertRaises(TypeError):
-            self.assertEqual(three_or_more_lines_finder(self.list_5), self.list_5)
+            self.assertEqual(get_lines_intersect_three_or_more_points(self.list_5), self.list_5)
 
     def test_empty_lists(self):
         with self.assertRaises(TypeError):
-            self.assertEqual(three_or_more_lines_finder(self.list_6), self.list_6)
+            self.assertEqual(get_lines_intersect_three_or_more_points(self.list_6), self.list_6)
 
     def test_no_line(self):
-        self.assertEqual(three_or_more_lines_finder(self.list_7), self.list_1)
+        self.assertEqual(get_lines_intersect_three_or_more_points(self.list_7), self.list_1)
 
     def test_two_lines(self):
-        line_1 = three_or_more_lines_finder(self.list_8)[0]
-        line_2 = three_or_more_lines_finder(self.list_8)[1]
+        line_1 = get_lines_intersect_three_or_more_points(self.list_8)[0]
+        line_2 = get_lines_intersect_three_or_more_points(self.list_8)[1]
 
         expected_result_line_1 = {'a': -8, 'b': 4, 'c': -4}
         expected_result_line_2 = {'a': 0, 'b': 0, 'c': 0}
@@ -67,9 +67,9 @@ class LinesIntersectionTest(unittest.TestCase):
         self.assertEqual(line_2.get('c'), expected_result_line_2.get('c'))
 
     def test_three_lines(self):
-        line_1 = three_or_more_lines_finder(self.list_9)[0]
-        line_2 = three_or_more_lines_finder(self.list_9)[1]
-        line_3 = three_or_more_lines_finder(self.list_9)[2]
+        line_1 = get_lines_intersect_three_or_more_points(self.list_9)[0]
+        line_2 = get_lines_intersect_three_or_more_points(self.list_9)[1]
+        line_3 = get_lines_intersect_three_or_more_points(self.list_9)[2]
 
         expected_result_line_1 = {'a': 8, 'b': -4, 'c': 4}
         expected_result_line_2 = {'a': -6, 'b': 3, 'c': -3}
