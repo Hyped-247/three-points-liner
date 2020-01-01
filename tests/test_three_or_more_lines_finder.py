@@ -71,9 +71,9 @@ class LinesIntersectionTest(unittest.TestCase):
         line_2 = three_or_more_lines_finder(self.list_9)[1]
         line_3 = three_or_more_lines_finder(self.list_9)[2]
 
-        expected_result_line_1 = {'a': 8, 'b': -4, 'c': 4}  # 'formatted_line': '8x -4y = 4'
-        expected_result_line_2 = {'a': -6, 'b': 3, 'c': -3}  # 'formatted_line': '-6x + 3y = -3'
-        expected_result_line_3 = {'a': 2, 'b': -1, 'c': 1}  # 'formatted_line': '2x -1y = 1'
+        expected_result_line_1 = {'a': 8, 'b': -4, 'c': 4}
+        expected_result_line_2 = {'a': -6, 'b': 3, 'c': -3}
+        expected_result_line_3 = {'a': 2, 'b': -1, 'c': 1}
 
         self.assertEqual(line_1.get('a'), expected_result_line_1.get('a'))
         self.assertEqual(line_1.get('b'), expected_result_line_1.get('b'))
