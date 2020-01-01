@@ -1,12 +1,26 @@
-def is_on_line(a: int, b: int, c: int, point: list):
+def collinear(x1, y1, x2, y2, x3, y3):
     """
-    :param a: int
-    :param b: int
-    :param c: int
-    :param point: a list containing two integers
-    :return: bool
+    :param x1: int
+    :param y1: int
+    :param x2: int
+    :param y2: int
+    :param x3: int
+    :param y3: int
+    :return: tuple of dictionary lines or tuple of Nones
     """
-    return get_slope_value(a, b, point) == c  # get_slope_value(a, b, point) * (point[1]) == c
+    if (y3 - y2) * (x2 - x1) == (y2 - y1) * (x3 - x2):
+        a, b, c = find_line_given_two_points([x1, y1], [x2, y2])
+        line = {'a': a, 'b': b, 'c': c, "formatted_line": format_line(a, b, c)}
+
+        a, b, c = find_line_given_two_points([x2, y2], [x3, y3])
+        line2 = {'a': a, 'b': b, 'c': c, "formatted_line": format_line(a, b, c)}
+
+        a, b, c = find_line_given_two_points([x1, y1], [x3, y3])
+        line3 = {'a': a, 'b': b, 'c': c, "formatted_line": format_line(a, b, c)}
+
+        return line, line2, line3
+
+    return None, None, None
 
 
 def get_slope_value(a: int, b: int, point: list):
@@ -39,6 +53,12 @@ def validate(point: list):
 
 
 def format_line(a, b, c):
+    """
+    :param a:
+    :param b:
+    :param c:
+    :return:
+    """
     if b < 0:
         return f"{a}x {b}y = {c}"
     return f"{a}x + {b}y = {c}"

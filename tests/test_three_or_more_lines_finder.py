@@ -12,8 +12,8 @@ class LinesIntersectionTest(unittest.TestCase):
         self.list_5 = [[1, 2], [2, 4], ['1', 3]]
         self.list_6 = [[], [], [], []]
         self.list_7 = [[5, 9], [6, 8], [3, 5]]  # no lines.
-        self.list_8 = ""  # 1 lines.
-        self.list_9 = [[5, 9], [1, 1], [1, 1]]  # 2 lines.
+        self.list_8 = [[5, 9], [1, 1], [1, 1]]  # 2 lines.
+        self.list_9 = [[1, 1], [5, 9], [2, 3]]  # 3 lines.
 
     def tearDown(self):
         self.list_1 = None
@@ -51,15 +51,10 @@ class LinesIntersectionTest(unittest.TestCase):
     def test_no_line(self):
         self.assertEqual(three_or_more_lines_finder(self.list_7), self.list_1)
 
-    # def test_one_line(self):
-    #     line = three_or_more_lines_finder(self.list_8)[0]
-    #     self.assertEqual(line.a, "")
-    #     self.assertEqual(line.b, "")
-    #     self.assertEqual(line.c, "")
-    #
     def test_two_lines(self):
-        line_1 = three_or_more_lines_finder(self.list_9)[0]
-        line_2 = three_or_more_lines_finder(self.list_9)[1]
+        line_1 = three_or_more_lines_finder(self.list_8)[0]
+        line_2 = three_or_more_lines_finder(self.list_8)[1]
+
         expected_result_line_1 = {'a': -8, 'b': 4, 'c': -4}
         expected_result_line_2 = {'a': 0, 'b': 0, 'c': 0}
 
@@ -70,6 +65,27 @@ class LinesIntersectionTest(unittest.TestCase):
         self.assertEqual(line_2.get('a'), expected_result_line_2.get('a'))
         self.assertEqual(line_2.get('b'), expected_result_line_2.get('b'))
         self.assertEqual(line_2.get('c'), expected_result_line_2.get('c'))
+
+    def test_three_lines(self):
+        line_1 = three_or_more_lines_finder(self.list_9)[0]
+        line_2 = three_or_more_lines_finder(self.list_9)[1]
+        line_3 = three_or_more_lines_finder(self.list_9)[2]
+
+        expected_result_line_1 = {'a': 8, 'b': -4, 'c': 4}  # 'formatted_line': '8x -4y = 4'
+        expected_result_line_2 = {'a': -6, 'b': 3, 'c': -3}  # 'formatted_line': '-6x + 3y = -3'
+        expected_result_line_3 = {'a': 2, 'b': -1, 'c': 1}  # 'formatted_line': '2x -1y = 1'
+
+        self.assertEqual(line_1.get('a'), expected_result_line_1.get('a'))
+        self.assertEqual(line_1.get('b'), expected_result_line_1.get('b'))
+        self.assertEqual(line_1.get('c'), expected_result_line_1.get('c'))
+
+        self.assertEqual(line_2.get('a'), expected_result_line_2.get('a'))
+        self.assertEqual(line_2.get('b'), expected_result_line_2.get('b'))
+        self.assertEqual(line_2.get('c'), expected_result_line_2.get('c'))
+
+        self.assertEqual(line_3.get('a'), expected_result_line_3.get('a'))
+        self.assertEqual(line_3.get('b'), expected_result_line_3.get('b'))
+        self.assertEqual(line_3.get('c'), expected_result_line_3.get('c'))
 
 
 if __name__ == '__main__':

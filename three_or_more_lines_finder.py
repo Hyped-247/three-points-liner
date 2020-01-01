@@ -7,7 +7,8 @@
 ## Email: mmahjoub@westmont.edu
 ## Status: production
 """
-from utilities import find_line_given_two_points, is_on_line, validate, format_line
+from utilities import validate, collinear
+from itertools import combinations
 
 
 def three_or_more_lines_finder(list_points):
@@ -21,42 +22,25 @@ def three_or_more_lines_finder(list_points):
         return []
 
     result = list()
-    p1, p2, p3 = 0, 1, 2
+    perm = list(combinations(list_points, 3))
 
-    while True:
-        while p3 != list_points_len and p2 != list_points_len:
-            if p3 == p1 or p3 == p2:
-                p3 += 1
-            else:
-                point_1_validated = validate(list_points[p1])
-                point_2_validated = validate(list_points[p2])
-                point_3_validated = validate(list_points[p3])
+    for element in perm:
+        point_1_validated = validate(element[0])
+        point_2_validated = validate(element[1])
+        point_3_validated = validate(element[2])
+        line, line2, line3 = collinear(point_1_validated[0], point_1_validated[1],
+                                       point_2_validated[0], point_2_validated[1],
+                                       point_3_validated[0], point_3_validated[1])
 
-                a, b, c = find_line_given_two_points(point_1_validated, point_2_validated)
-                if is_on_line(a, b, c, point_3_validated):
-                    line = {'a': a, 'b': b, 'c': c, "formatted_line": format_line(a, b, c)}
-                    if line not in result:  # remove duplicates.
-                        result.append(line)
-                p3 += 1
+        if line and line not in result:
+            result.append(line)
 
-        if p1 == list_points_len - 2 and p2 == list_points_len:
-            break
+        if line2 and line2 not in result:
+            result.append(line2)
 
-        if p3 == list_points_len:
-            p3 = 0
-            p2 += 1
-        else:
-            p3 = 0
-            p1 += 1
-            p2 = p1 + 1
+        if line3 and line3 not in result:
+            result.append(line3)
 
     return result
-
-
-if __name__ == '__main__':
-    list_points = [[1, 1], [1, 4], [1, 5]]
-    list_points2 = [[5, 9], [2, 3], [1, 1]]
-    list_points3 = [[1, 1], [1, 1], [4, 5]]
-    print(three_or_more_lines_finder(list_points))
 
 
