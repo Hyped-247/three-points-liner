@@ -14,7 +14,7 @@ def collinear(p1: list, p2: list, p3: list) -> tuple or None:
     return None
 
 
-def get_line(p1: list, p2: list):
+def get_line(p1: list, p2: list) -> tuple:
     """
     Computes the line and returns it.
     :param p1: list of two numbers

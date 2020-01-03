@@ -5,13 +5,20 @@ from itertools import combinations
 
 
 class LinesFinder:
-    def __init__(self, points: list) -> None:
+    """
+    This class is responsible for finding lines given a list of points.
+    """
+    def __init__(self, points: list):
+        """
+        :param points: a list containing non duplicates lists of points (ex. [[5, 9], [6, 8], [3, 5]])
+        :return nothing
+        """
         self._points = points
         self._result = set()
 
     def get_lines_intersect_three_or_more_points(self):
         """
-        Takes a list containing non duplicates lists of points (ex. [[5, 9], [6, 8], [3, 5]]),
+        Uses a list containing non duplicates lists of points (ex. [[5, 9], [6, 8], [3, 5]]),
         and returns a list of lines that intersect with three or more points.
         :return: a list of lines (ex. ['y = 2.0x + -1.0', 'x = 1.0', ...])
         :raise TypeError if input data is not a list of lists containing two numbers.
