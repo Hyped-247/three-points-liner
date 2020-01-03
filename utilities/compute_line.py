@@ -1,4 +1,3 @@
-
 def collinear(p1: list, p2: list, p3: list) -> tuple or None:
     """
     Finds the collinear given three points.

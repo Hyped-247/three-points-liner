@@ -1,5 +1,5 @@
 # Lines Finder
-The get_lines_intersect_three_or_more_points function takes a list of three or more 
+The LinesFinder class takes a list of three or more 
  non duplicate points (ex. [[1, 2], [1, 3], [1, 4]]). And returns a list of lines that intersects with 3 or more points 
 (ex.['y = 2.0x + -1.0', 'x = 1.0', ...]). 
 
@@ -41,11 +41,25 @@ print(lines_finder_obj.get_lines_intersect_three_or_more_points())
 ``` 
 lines_finder/
     ├── tests/
+    |   ├── __init__.py
     |   ├── test_lines_finder.py
+        ├── utilities/
+        |   ├── test_compute_line.py
+        |   ├── test_format.py
+        |   ├── test_validator.py
+    ├── utilities/
+    |   ├── __init__.py
+    |   ├── compute_line.py
+    |   ├── format.py
+    |   ├── validator.py
     ├── README.md
-    ├── lines_finder.py
-    └── utilities.py
+    └── lines_finder.py
 ```
+
+Explain the file stracture of your project. 
+Explain what each files does. 
+Explain why you chose to do it that way. 
+
 The lines_finder.py contains a single function called: get_lines_intersect_three_or_more_points. 
  
 The utilities.py contain helper functions that are used within the get_lines_intersect_three_or_more_points function.
