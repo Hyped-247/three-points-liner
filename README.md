@@ -1,41 +1,48 @@
 # Lines Finder
-The get_lines_intersect_three_or_more_points function takes a list of points (ex. [[5, 9], [6, 8], [3, 5]]). 
-And returns a list of dictionaries (ex.[{'a': -8, 'b': 4, 'c': -4, 'formatted_line': '-8x + 4y = -4'}, ...])
-Each element within the returned list is a line that intersects with 3 or more points.   
+The get_lines_intersect_three_or_more_points function takes a list of three or more 
+ non duplicate points (ex. [[1, 2], [1, 3], [1, 4]]). And returns a list of lines that intersects with 3 or more points 
+(ex.['y = 2.0x + -1.0', 'x = 1.0', ...]). 
+
 ## Usage
 
 ```python
 from lines_finder import get_lines_intersect_three_or_more_points
 
-print(get_lines_intersect_three_or_more_points([[5, 9], [6, 8], [3, 5]]))  # no lines. 
+print(get_lines_intersect_three_or_more_points([[5, 9], [6, 8], [3, 5]]))  # no lines.
 # []
 
-print(get_lines_intersect_three_or_more_points([[5, 9], [1, 1], [1, 1]]))  # 2 lines. 
-# [{'a': -8, 'b': 4, 'c': -4, 'formatted_line': '-8x + 4y = -4'}, 
-# {'a': 0, 'b': 0, 'c': 0, 'formatted_line': '0x + 0y = 0'}]
+print(get_lines_intersect_three_or_more_points([[1, 2], [1, 3], [1, 4]]))  # one line.
+# ['x = 1.0']
 
-print(get_lines_intersect_three_or_more_points([[1, 1], [5, 9], [2, 3], [2, 3]]))  # 3 lines. 
-# [{'a': 8, 'b': -4, 'c': 4, 'formatted_line': '8x -4y = 4'}, 
-# {'a': -6, 'b': 3, 'c': -3, 'formatted_line': '-6x + 3y = -3'}, 
-# {'a': 2, 'b': -1, 'c': 1, 'formatted_line': '2x -1y = 1'}]
+print(get_lines_intersect_three_or_more_points([[1, 2], [1, 3], [1, 4], [1, 7], [2, 3], [5, 9], [0, -1]]))  # two line.
+# ['y = 2.0x + -1.0', 'x = 1.0']
+
+
+print(get_lines_intersect_three_or_more_points([[1, 2], [1, 3], [1, 4], [1, 7],  # three lines.
+                                                [2, 3], [5, 9], [0, -1], [0.5, 0],
+                                                [1, 1], [10, 10], [-4, -4]])) 
+# ['y = 1.0x + -0.0', 'y = 2.0x + -1.0', 'x = 1.0']
+ 
+
+print(get_lines_intersect_three_or_more_points([[1, 2], [1, 3], [1, 4], [1, 7],  # four lines.
+                                                [2, 3], [5, 9], [0, -1], [0.5, 0],
+                                                [1, 1], [3, 3], [-4, -4]])) 
+# ['y = 1.0x + -0.0', 'y = 2.0x + -1.0', 'y = -0.0x + 3.0', 'x = 1.0']
+ 
 ```
 
-  '-8x + 4y = -4' => 4y = 8x - 4 => 2x - 1 => (m, c) / (2, -1)
-  '-4x + 2y = -2' => 2y = 4x - 2 => 2x - 1 => (m, c) / (2, -1)  
+# Project Structure
+``` 
+lines_finder/
+    ├── tests/
+    |   ├── test_lines_finder.py
+    ├── README.md
+    ├── lines_finder.py
+    └── utilities.py
+```
+The lines_finder.py contains a single function called: get_lines_intersect_three_or_more_points. 
+ 
+The utilities.py contain helper functions that are used within the get_lines_intersect_three_or_more_points function.
 
-# 
+The test_lines_finder.py contains unit tests that cover %100 of the code. 
 
-# [ [1, 1], [5, 9], [2, 3], [2, 5] ]
-
-==> 
-def colinear(p1, p2, p3):
-   
-
-
-
-
-
-
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)

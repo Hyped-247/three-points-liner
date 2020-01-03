@@ -1,13 +1,11 @@
 from itertools import combinations
+from pprint import pprint
 
 
 def format_line(tup):
     if tup[0]:  # m is inf. => vertical lines
         c = tup[1]
         return (tup[0], tup[1], tup[2], f"x = {c}")
-    elif abs(tup[1]) < 0.00000000001:  # floating point equals
-        c = tup[2]
-        return (tup[0], tup[1], tup[2], f"y = {c}")
     else:
         m = tup[1]
         c = tup[2]
@@ -130,14 +128,13 @@ def get_intersecting_lines_formatted(points):
 
 # Todo: make sure that there are no duplicates.
 # Todo: make sure that the lists is greater than 2.
-# Todo: make sure that
 
 
 print(get_intersecting_lines_formatted([[1, 2], [1, 3], [1, 4]]))  # one line
 
 print(get_intersecting_lines_formatted([[1, 2], [1, 3], [1, 4], [1, 7],
                                         [2, 3], [5, 9], [0, -1]]))  # 2 line
-from pprint import pprint
+
 pprint(get_intersecting_lines_formatted([[1, 2], [1, 3], [1, 4], [1, 7],
                                         [2, 3], [5, 9], [0, -1], [0.5, 0],
                                         [1, 1], [10, 10], [-4, -4]
@@ -147,4 +144,4 @@ pprint(get_intersecting_lines_formatted([[1, 2], [1, 3], [1, 4], [1, 7],
 pprint(get_intersecting_lines_formatted([[1, 2], [1, 3], [1, 4], [1, 7],
                                         [2, 3], [5, 9], [0, -1], [0.5, 0],
                                         [1, 1], [3, 3], [-4, -4]
-                                         ])) # 4 lines
+                                         ]))  # 4 lines
