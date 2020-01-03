@@ -1,7 +1,11 @@
 # Lines Finder
 The LinesFinder class takes a list of three or more 
- non duplicate points (ex. [[1, 2], [1, 3], [1, 4]]). And returns a list of lines that intersects with 3 or more points 
-(ex.['y = 2.0x + -1.0', 'x = 1.0', ...]). 
+non duplicate points (ex. [[1, 2], [1, 3], [1, 4]]). This class 
+contains a single method called: get_lines_intersect_three_or_more_points. This method 
+returns a list of lines that intersects with 3 or more points 
+(ex.['y = 2.0x + -1.0', 'x = 1.0', ...]). In the future, we might 
+implement other methods (ex. get_lines_given_triangle) within the LinesFinder class. But for now, 
+we only have one method.  
 
 ## Usage
 
