@@ -55,14 +55,3 @@ lines_finder/
     ├── README.md
     └── lines_finder.py
 ```
-
-Explain the file stracture of your project. 
-Explain what each files does. 
-Explain why you chose to do it that way. 
-
-The lines_finder.py contains a single function called: get_lines_intersect_three_or_more_points. 
- 
-The utilities.py contain helper functions that are used within the get_lines_intersect_three_or_more_points function.
-
-The test_lines_finder.py contains unit tests that cover %100 of the code. 
-
