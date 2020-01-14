@@ -28,10 +28,10 @@ def validate_list_point(point: list) -> list or TypeError:
             first_element = point[0]
             second_element = point[1]
             if not isinstance(first_element, (int, float)) or not isinstance(second_element, (int, float)):
-                raise TypeError("The points list must only contain float.")
+                raise TypeError("The points list must contain float or int.")
             return point
         else:
-            raise TypeError("Each list of points must contain two integers.")
+            raise TypeError("Each list of points must contain two numbers.")
     else:
         raise TypeError("Please input a list of points.")
 

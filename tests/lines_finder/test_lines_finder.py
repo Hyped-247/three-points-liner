@@ -1,5 +1,5 @@
 import unittest
-from lines_finder import LinesFinder
+from lines_finder.lines_finder import LinesFinder
 
 
 class LinesFinderTest(unittest.TestCase):
