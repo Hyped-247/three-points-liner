@@ -1,95 +1,121 @@
 # Lines Finder
-The LinesFinder class takes a list of non duplicate points (ex. [[1, 2], [1, 3], [1, 4], [1, 7], [2, 3], [5, 9], [0, -1]]) as an input, 
+The LinesFinder class takes a list of point objects (ex. [Point(1, 2), Point(1, 3), Point(1, 4)]) as an input, 
 and computes a distinct list of lines that intersect with 3 or more 
-points from the input set (ex. ['y = 2.0x + -1.0', 'x = 1.0']). In the future, we might 
-implement other methods (ex. get_lines_given_triangle) within the LinesFinder class. But for now, 
-we only have one method.  
+points from the input set (ex. ['y = 2.0x + -1.0', 'x = 1.0']). 
 
 
 ## Usage
-Examples of valid inputs
 ```python
 from lines_finder.lines_finder import LinesFinder
+from point.point import Point
 
-# Construct an object 
-lines_finder_obj = LinesFinder([[5, 9], [6, 8], [3, 5]])
+print("No lines")
+points = [Point(5, 9), Point(6, 8), Point(3, 5), Point(3, 5), Point(3, 5)]  # no lines.
 
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())  # no lines.
+lines_finder_obj = LinesFinder(points)
+print([res.get_line_tuple() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
 # []
+print([res.get_line_str() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# []
+print([res.get_line_dict() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# []
+print("................................................................................")
 
-lines_finder_obj = LinesFinder([[1, 2], [1, 3], [1, 4]])
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())  # one line.
+print("One lines")
+points = [Point(1, 2), Point(1, 3), Point(1, 4)]  # one line.
+
+lines_finder_obj = LinesFinder(points)
+print([res.get_line_tuple() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [(True, 1.0, None)]
+print([res.get_line_str() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
 # ['x = 1.0']
+print([res.get_line_dict() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [{'x': 1.0}]
+print("................................................................................")
 
-lines_finder_obj = LinesFinder([[1, 2], [1, 3], [1, 4], [1, 7], [2, 3], [5, 9], [0, -1]])
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())  # two line.
+
+print("Two lines")
+points = [Point(1, 2), Point(1, 3), Point(1, 4),  # two lines
+          Point(1, 7), Point(2, 3), Point(5, 9), Point(0, -1)]
+
+lines_finder_obj = LinesFinder(points)
+print([res.get_line_tuple() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [(False, 2.0, -1.0), (True, 1.0, None)]
+print([res.get_line_str() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
 # ['y = 2.0x + -1.0', 'x = 1.0']
-
-lines_finder_obj = LinesFinder([[1, 2], [1, 3], [1, 4], [1, 7],  # three lines.
-                                                [2, 3], [5, 9], [0, -1], [0.5, 0],
-                                                [1, 1], [10, 10], [-4, -4]])
-print(lines_finder_obj.get_lines_intersect_three_or_more_points()) 
-# ['y = 1.0x + -0.0', 'y = 2.0x + -1.0', 'x = 1.0']
- 
-lines_finder_obj = LinesFinder([[1, 2], [1, 3], [1, 4], [1, 7],  # four lines.
-                                                [2, 3], [5, 9], [0, -1], [0.5, 0],
-                                                [1, 1], [3, 3], [-4, -4]])
-print(lines_finder_obj.get_lines_intersect_three_or_more_points()) 
-# ['y = 1.0x + -0.0', 'y = 2.0x + -1.0', 'y = -0.0x + 3.0', 'x = 1.0']
-
-```
-Examples of invalid inputs
-```python
-from lines_finder.lines_finder import LinesFinder
-
-lines_finder_obj = LinesFinder([[1, 2], [1, 3]])  # need three points.
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())
-# [] 
-
-lines_finder_obj = LinesFinder([[1, 2], [1, 3], [1, 3]])  # cannot have duplicates.
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())
-# TypeError: Duplicate points are not allowed.
+print([res.get_line_dict() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [{'y': 2.0, 'x': -1.0}, {'x': 1.0}]
+print("................................................................................")
 
 
-lines_finder_obj = LinesFinder([[1, 1], [1, 2], [1], [1, 4]])  # must have two numbers within list.
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())
-# TypeError: Each list of points must contain two numbers.
+print("Three lines")
+points = [Point(1, 2, ), Point(1, 3), Point(1, 4), Point(1, 7),  # three lines.
+          Point(2, 3), Point(5, 9), Point(0, -1), Point(0.5, 0),
+          Point(1, 1), Point(10, 10), Point(-4, -4)]
+
+lines_finder_obj = LinesFinder(points)
+print([res.get_line_tuple() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [(False, 1.0, 0.0), (False, 2.0, -1.0), (True, 1.0, None)]
+print([res.get_line_str() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# ['y = 1.0x + 0.0', 'y = 2.0x + -1.0', 'x = 1.0']
+print([res.get_line_dict() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [{'y': 1.0, 'x': 0.0}, {'y': 2.0, 'x': -1.0}, {'x': 1.0}]
+print("................................................................................")
 
 
-lines_finder_obj = LinesFinder([[1, 1], [1, 2], [1, '2'], [1, 4]])  # type must be int or float.
-print(lines_finder_obj.get_lines_intersect_three_or_more_points())
-# TypeError: The points list must contain float or int.
+print("Four lines")
+points = [Point(1, 2), Point(1, 3), Point(1, 4), Point(1, 7),  # four lines.
+          Point(2, 3), Point(5, 9), Point(0, -1), Point(0.5, 0),
+          Point(1, 1), Point(3, 3), Point(-4, -4), Point(-4, -4), Point(-4, -4)]
+
+lines_finder_obj = LinesFinder(points)
+print([res.get_line_tuple() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [(False, 1.0, 0.0), (False, 2.0, -1.0), (False, -0.0, 3.0), (True, 1.0, None)]
+print([res.get_line_str() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# ['y = 1.0x + 0.0', 'y = 2.0x + -1.0', 'y = -0.0x + 3.0', 'x = 1.0']
+print([res.get_line_dict() for res in lines_finder_obj.get_lines_intersect_three_or_more_points()])
+# [{'y': 1.0, 'x': 0.0}, {'y': 2.0, 'x': -1.0}, {'y': -0.0, 'x': 3.0}, {'x': 1.0}]
+print("................................................................................")
+
 ```
 
 # Project Structure
 ``` 
-lines_finder/
-    ├── lines_finder/
-        ├── __init__.py
-        ├── lines_finder.py
-    ├── tests/
-        ├── __init__.py
-        ├── lines_finder/
-        |   ├── __init__.py
-        |   ├── test_lines_finder.py
-        ├── utilities/
-        |   ├── __init__.py
-        |   ├── test_compute_line.py
-        |   ├── test_format.py
-        |   ├── test_validator.py
-    ├── utilities/
-    |   ├── __init__.py
-    |   ├── compute_line.py
-    |   ├── format.py
-    |   ├── validator.py
+├── lines_finder 
+    ├── line
+    │   ├── __init__.py
+    │   └── line.py
+    ├── lines_finder
+    │   ├── __init__.py
+    │   └── lines_finder.py
+    ├── point
+    │   ├── __init__.py
+    │   └── point.py
+    ├── tests
+    │   ├── __init__.py
+    │   ├── line
+    │   │   ├── __init__.py
+    │   │   └── test_line.py
+    │   ├── lines_finder
+    │   │   ├── __init__.py
+    │   │   └── test_lines_finder.py
+    │   └── point
+    │       ├── __init__.py
+    │       └── test_point.py
+    ├── LICENSE.md
     ├── README.md
-    └── LICENSE.md
 ```
 Let me explain what each directory does:  
 * lines_finder 
     * This dir contains the LinesFinder class. This class contains a method called:  
 get_lines_intersect_three_or_more_points. This method returns a distinct list 
-of lines that intersect with 3 or more points from the input set.  
+of Line objects that intersect with 3 or more points from the input set.  
+
+* point
+    * The point dir contains the Point class. This class is going to store, and validate the X, Y input points.
+
+* line
+    * The line dir contains the Line class. This class is going to compute, validate, and format Line objects.
 
 * tests
     * This dir contains tests that cover %100 of the code base. Every test 
@@ -97,12 +123,7 @@ file tests a single python module. To know what each file is testing, simply
 look at what follows test_. For example, test_lines_finder.py ensures that 
 lines_finder.py is working correctly. This naming convention makes it easy to know what each test is testing.   
 
-* utilities
-    * This dir contains helper functions. These helper functions are placed in three different python files. 
-    First, compute_line.py contains functions that will help the LinesFinder class preform mathematical operations. 
-    Second, format.py contains a single function called: format_line_str. This function formats lines. The reason why 
-    it is called format_line_str instead of format_line is because we might add more functions to
-    this file (ex. format_line_tuple, format_line_dict, etc). Finally, we have validator.py. This file contains functions that will validate the points. 
+ 
 
 ## Built With
 
